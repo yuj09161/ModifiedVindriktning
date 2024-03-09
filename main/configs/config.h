@@ -1,0 +1,76 @@
+#ifndef __VINDRIKTNING_CONFIG_H_INCLUDED__
+#define __VINDRIKTNING_CONFIG_H_INCLUDED__
+
+#include <stdint.h>
+#include <secrets.h>
+
+#include "driver/gpio.h"
+#include "driver/i2c.h"
+
+// SmartThings
+#define SET_DEVICE_STATUS_BUF_SIZE   2048
+#define GET_STATUS_INTERVAL          5000
+#define GET_CONFIG_PER_GET_STATUS    2
+#define UPDATE_STATUS_PER_GET_STATUS 3
+
+// Semaphore
+#define SEMAPHORE_MAX_WAIT               pdMS_TO_TICKS(5000)
+#define CONFIG_SEMAPHORE_MAX_VALUE       3
+#define LAST_AVERAGE_SEMAPHORE_MAX_VALUE 3
+
+// Status LED
+#define STATUS_LED_BRIGHT 8
+
+// WS2812
+#define WS2812_INIT_BRIGHT      6
+#define TEMPERATURE_LED         0
+#define HUMIDITY_LED            3
+#define FINEDUST_LED            6
+#define BOTTOM_LED              7
+
+// Sensor common
+#define SENSOR_STARTUP_DELAY      2000
+#define GET_SENSOR_TASK_DELAY_MIN 2000
+#define SAMPLE_PER_UPDATE_STATUS  3
+
+// PM1006
+#define PM1006_TIMEOUT     5000
+#define PM1006_TX_BUF_SIZE 256
+#define PM1006_RX_BUF_SIZE 256
+#define PM1006_THRESHOLD   199
+#define PM1006_FAN_STARTUP_DELAY 5000
+
+// I2C
+#define I2C_NUM0_CLOCK_SPEED 20000  // 20k
+
+// AHT20
+#define AHT20_I2C_NUM  I2C_NUM_0
+#define AHT20_I2C_ADDR 0x38
+
+// BMP280
+#define BMP280_I2C_NUM  I2C_NUM_0
+#define BMP280_I2C_ADDR 0x77
+#define BMP280_TIMEOUT  1000
+
+// AGS02MA
+#define AGS02MA_I2C_NUM  I2C_NUM_0
+#define AGS02MA_I2C_ADDR 0x1A
+#define AGS02MA_TIMEOUT  1000
+
+// Pins
+#define PIN_LED          GPIO_NUM_15
+#define PIN_PM1006_FAN   GPIO_NUM_18
+#define PIN_I2C_NUM0_SDA GPIO_NUM_17
+#define PIN_I2C_NUM0_SCL GPIO_NUM_21
+#define PIN_WS2812       GPIO_NUM_34
+#define PIN_PM1006_TX    GPIO_NUM_33
+#define PIN_PM1006_RX    GPIO_NUM_35
+#define PIN_LV_1_UNUSED  GPIO_NUM_36
+
+// Calculated values
+#define GET_SENSOR_TASK_DELAY (GET_STATUS_INTERVAL * UPDATE_STATUS_PER_GET_STATUS) / SAMPLE_PER_UPDATE_STATUS
+#if GET_SENSOR_TASK_DELAY < GET_SENSOR_TASK_DELAY_MIN
+#error Too small SAMPLE_PER_UPDATE_STATUS
+#endif
+
+#endif

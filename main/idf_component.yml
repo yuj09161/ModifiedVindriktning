@@ -1,0 +1,7 @@
+dependencies:
+  aht20: '^0.1.0~1'
+  led_strip: '^2.5.3'
+  yuj09161/ESP32CommonModules:
+    git: 'https://github.com/yuj09161/ESP32CommonModules.git'
+  yuj09161/ESP32SmartThingsREST:
+    git: 'https://github.com/yuj09161/ESP32SmartThingsREST.git'

@@ -1,0 +1,17 @@
+idf_component_register(
+    SRCS
+        "main.cpp"
+        "io.cpp"
+        "semaphore.c"
+        "sample_array.cpp"
+        "wifi/wifi.c"
+        "smartthings/request.c"
+    INCLUDE_DIRS
+        "include"
+        "configs"
+    REQUIRES
+        nvs_flash
+        esp_netif
+        esp_wifi
+        json
+)
